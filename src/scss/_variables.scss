@@ -1,0 +1,26 @@
+$min-screen-width: 320px !default;
+$max-screen-width: 435px !default;
+$unit-size: 8px !default;
+$content-padding: $unit-size !default;
+
+// $secondary-color: rgb(0, 188, 212);
+// $primary-color: #ff4081;
+$primary-text: #fff !default;
+$primary-color: #E91E63 !default;
+$secondary-text: #fff !default;
+$secondary-color: #2196F3 !default;
+
+$dark-bg-color: #900 !default;
+$dark-text-color: #fff !default;
+$light-bg-color: #fff !default;
+$light-text-color: rgba(0,0,0,0.87) !default;
+
+$header-bar-height: 5 * $unit-size !default;
+$sub-header-bar-height: 5 * $unit-size !default;
+$footer-bar-height: 5 * $unit-size !default;
+
+$elevation-1: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) !default;
+$elevation-2: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) !default;
+$elevation-3: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4) !default;
+$elevation-4: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) !default;
+$elevation-5: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4) !default;

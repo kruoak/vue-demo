@@ -1,0 +1,89 @@
+
+@media (min-width: 960px) and (min-height: 480px) {
+  body {
+    @include define-breakpoint("desktop");
+  }
+  .app {
+    > .header-bar {
+      margin-left: 240px;
+      padding-left: 16px;
+      padding-left: 8px;
+    }
+    > .page {
+      > .sub-header-bar, > .app-content, .footer-bar {
+        margin-left: 240px;
+        padding-left: 16px;
+      }
+    }
+
+    > .sidemenu {
+      > .content {
+        left: 0;
+        width: 240px;
+        box-shadow: $elevation-1;
+      }
+      > .mask {
+        display: none;
+      }
+    }
+  }
+}
+$min-width: 320px - 24px;
+
+@media (min-width: $min-width * 2 + 16px) and (max-width: $min-width * 3 + 31px)  {
+  // body {
+  //   @include define-breakpoint("two-column");
+  // }
+  .row {
+    > .col {
+      min-width:calc(50% + 16px);
+      padding: 0 16px;
+    }
+    > .col-2, > .col-3 {
+      max-width:calc(100% + 16px);
+      width: calc(100% + 16px);
+    }
+  }
+  .page {
+    .footer-bar {
+      .row {
+        > .col {
+          min-width:calc(25% + 8px);
+        }
+        > .col-2 {
+          max-width:calc(25% + 8px);
+          width:100%;
+        }
+      }
+    }
+  }
+}
+@media (min-width: $min-width * 3 + 32px) {
+  // body {
+  //   @include define-breakpoint("three-column");
+  // }
+  .row {
+    max-width: 920px;
+    > .col {
+      min-width:calc(50% + 16px);
+      padding: 0 16px;
+    }
+    > .col-2, > .col-3 {
+      max-width:calc(100% + 16px);
+      width:calc(100% + 16px);
+    }
+  }
+  .page {
+    .footer-bar {
+      .row {
+        > .col {
+          min-width:calc(16.67% + 8px);
+        }
+        > .col-2 {
+          max-width:calc(33.33% + 8px);
+          width:100%;
+        }
+      }
+    }
+  }
+}

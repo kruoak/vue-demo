@@ -1,0 +1,98 @@
+@import "fonts.scss";
+@import "reset.scss";
+@import 'icons.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin:0;
+  padding:0;
+}
+
+$panel-min-width: 240px;
+$panel-max-width: 320px;
+$panel-min-padding: 16px;
+$panel-max-padding: 40px;
+
+#signin-page {
+  min-height: 100vh;
+  display:flex;
+
+  .photo {
+    display:none;
+  }
+  .main-panel {
+    z-index:2;
+    position: fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    max-width:440px;
+    min-width:320px;
+    width:100%;
+    background-color:#fff;
+    overflow-y:auto;
+    > .inner {
+      padding: $panel-min-padding;
+      width:100%;
+      max-width: $panel-max-width + 2 * $panel-max-padding;
+      height:100%;
+      > .inner2 {
+        width:100%;
+        height:100%;
+        min-width: $panel-min-width;
+        max-width: $panel-max-width;
+        margin: 0 auto;
+        display:flex;
+        flex-direction: column;
+        .header {
+          height:64px;
+          flex-shrink:0;
+        }
+        .form {
+          min-width: 288px;
+          max-width: 320px;
+          flex-shrink:0;
+          .actions {
+            display:flex;
+            padding: 8px 0;
+            line-height: 24px;
+          }
+          .error {
+            color:red;
+            height:40px;
+            line-height:24px;
+            padding: 8px 0;
+          }
+        }
+        .push {
+          flex-grow: 1;
+          min-height: 40px;
+        }
+        .footer {
+          flex-shrink: 0;
+          height:40px;
+          line-height:40px;
+          display:flex;
+          img {
+            margin-right: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width:560px) {
+  #signin-page .photo {
+    position:fixed;
+    z-index:1;
+    display:block;
+    width:calc(100% - 320px);
+    height:100%;
+    background-image: url(/images/photo.jpg);
+    background-size: cover;
+  }
+}

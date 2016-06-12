@@ -1,0 +1,101 @@
+body {
+  @include define-breakpoint("table");
+}
+
+.app {
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  > .inner-wrap {
+    position: relative;
+    height:100%;
+  }
+}
+
+.header-bar {
+  height: $header-bar-height;
+  line-height:$header-bar-height;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  display:flex;
+  background-color: $dark-bg-color;
+  color: $dark-text-color;
+  > .left {
+    min-width: 40px;
+    flex-shrink: 0;
+  }
+  > .title {
+    flex-grow: 1;
+    padding: 8px;
+    height: 40px;
+    line-height: 24px;
+    @include ellipsis();
+  }
+  > .right {
+    min-width: 40px;
+    flex-shrink: 0;
+  }
+  .icon {
+    color: $dark-text-color;
+  }
+}
+
+.sidemenu {
+  &.-dock {
+    > .content {
+      left: 0;
+      width: 240px;
+      box-shadow: $elevation-1;
+    }
+    > .mask {
+      display: none;
+    }
+  }
+  &.-show {
+    display:block;
+    > .mask {
+      display: block;
+    }
+  }
+  > .content {
+    position: fixed;
+    left: calc(-1 * ( 100% - 40px - 8px) );
+    top: 0;
+    bottom: 0;
+    width: calc(100% - 40px - 8px);
+    max-width: 7 * $header-bar-height;
+    background-color: #fff;
+    box-shadow: $elevation-1;
+    z-index: 50;
+    > .sidemenu-header {
+      height: 40px;
+      background-color: $dark-bg-color;
+      color: $dark-text-color;
+      padding: 4px 8px;
+      line-height: 32px;
+      font-size: 20px;
+    }
+    > .sidemenu-content {
+      height: calc(100% - 88px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    > .sidemenu-footer {
+      height: 48px;
+    }
+  }
+  > .mask {
+    z-index: 51;
+    position:fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+  }
+}

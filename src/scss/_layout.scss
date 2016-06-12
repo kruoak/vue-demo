@@ -1,0 +1,282 @@
+body {
+  @include define-breakpoint("mobile");
+}
+
+.app {
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  > .inner-wrap {
+    position: relative;
+    height:100%;
+  }
+}
+
+
+// .icon {
+//   width: 40px;
+//   height: 40px;
+//   line-height: 24px;
+//   padding: 8px;
+// }
+.header-bar {
+  height: $header-bar-height;
+  line-height:$header-bar-height;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  display:flex;
+  background-color: $dark-bg-color;
+  color: $dark-text-color;
+  > .left {
+    min-width: 40px;
+    flex-shrink: 0;
+  }
+  > .title {
+    flex-grow: 1;
+    padding: 8px;
+    height: 40px;
+    line-height: 24px;
+    @include ellipsis();
+  }
+  > .right {
+    min-width: 40px;
+    flex-shrink: 0;
+  }
+  .icon {
+    color: $dark-text-color;
+  }
+}
+.page {
+  > .sub-header-bar {
+    height: $sub-header-bar-height;
+    line-height: $sub-header-bar-height;
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    background-color: $light-bg-color;
+    color: $light-text-color;
+  }
+  > .app-content {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: $header-bar-height;
+    bottom: 0;
+    overflow-y: scroll;
+    background-color: rgba(0,0,0,0.025);
+    &.-has-sub-header {
+      top: $header-bar-height + $sub-header-bar-height;
+    }
+    &.-has-footer {
+      bottom: $footer-bar-height;
+    }
+  }
+  .footer-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: $footer-bar-height;
+    line-height: $footer-bar-height;
+    padding: 0 8px;
+    .row {
+      > .col {
+        min-width:calc(50% + 8px);
+        padding: 0 0 0 8px;
+        margin-left: -8px;
+      }
+      > .col-2 {
+        max-width:calc(100% + 8px);
+        width:100%;
+      }
+    }
+  }
+}
+
+.screen-lock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top:0;
+  bottom:0;
+  background-color: transparent;
+  z-index: 10000;
+  display: none;
+  &.-show {
+    display:block;
+  }
+}
+.sidemenu {
+  &.-show {
+    display:block;
+    > .mask {
+      display: block;
+    }
+  }
+  > .content {
+    position: fixed;
+    left: calc(-1 * ( 100% - 40px - 8px) );
+    top: 0;
+    bottom: 0;
+    width: calc(100% - 40px - 8px);
+    max-width: 7 * $header-bar-height;
+    background-color: #fff;
+    box-shadow: $elevation-1;
+    z-index: 50;
+    > .sidemenu-header {
+      height: 40px;
+      background-color: $dark-bg-color;
+      color: $dark-text-color;
+      padding: 4px 8px;
+      line-height: 32px;
+      font-size: 20px;
+    }
+    > .sidemenu-content {
+      height: calc(100% - 88px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    > .sidemenu-footer {
+      height: 48px;
+    }
+  }
+  > .mask {
+    z-index: 51;
+    position:fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+  }
+}
+
+
+
+
+._padding {
+  padding: $unit-size;
+}
+._left {
+  text-align: left;
+}
+._right {
+  text-align: right;
+}
+._center {
+  text-align: center;
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  li {
+    min-height: 40px;
+    line-height: 40px;
+    display:block;
+    &.header {
+      min-height: 32px;
+      font-weight: bold;
+      line-height: 32px;
+      color: rgba(0,0,0,0.67);
+      padding: 0 16px;
+    }
+    &.divider {
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding-top: 3px;
+      min-height: 4px;
+      margin-bottom: 4px;
+    }
+  }
+  ul {
+    padding: 0;
+    margin:0;
+  }
+}
+
+.menu-item {
+  display: flex;
+  padding: 0 8px;
+
+  > .text {
+    font-size:14px;
+    height:40px;
+    vertical-align: center;
+    transform-style: preserve-3d;
+    padding-left: 8px;
+    > .multiline {
+      position:relative;
+      top:50%;
+      transform: translateY(-50%);
+      line-height:20px;
+      max-height:40px;
+      overflow-y:hidden;
+    }
+  }
+  > .icon {
+    flex-shrink: 0;
+    padding: 8px 0;
+    display:flex;
+  }
+  &:hover {
+    background-color: transparentize($dark-bg-color,0.9);
+  }
+  &:active, &:focus {
+    background-color: transparentize($dark-bg-color,0.8);
+    outline: none;
+  }
+  &.active {
+    color: $dark-bg-color;
+    background-color: transparentize($dark-bg-color,0.8);
+    > .text {
+      font-weight: bold;
+    }
+  }
+}
+
+.h1, .h2, .h3 {
+  height: 32px;
+  min-height: 32px;
+  line-height: 32px;
+}
+.h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+.h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+._hscroll {
+  &.row {
+    display: block;
+  }
+  overflow-x: auto;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  min-height: 5 * $unit-size;
+  height: 5 * $unit-size;
+  line-height: 5 * $unit-size;
+  flex-wrap: wrap;
+  > .col, > .col-2, > .col-3 {
+    min-width:calc(100% + 16px);
+    padding: 0 0 0 16px;
+    margin-left: -16px;
+  }
+}
