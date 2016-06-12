@@ -2,41 +2,54 @@
   <div class="page">
     <div class="app-content">
       <div style="width:960px">
-        <h1>ประเภทหน่วยรับบริจาค</h1>
+        <h1>site-type</h1>
         <ns-textbox
+          id="code"
           name="code"
-          :value.sync="form.code"
           label="Code"
-          icon="lightbulb_outline"
+          :value.sync="form.code"
+          :max-length="2"
+          validation-rules="min:2|max:2|required"
           ></ns-textbox>
         <ns-textbox
+          id="name"
           name="name"
-          :value.sync="form.name"
           label="Name"
-          icon="lightbulb_outline"
+          :value.sync="form.name"
+          validation-rules="required"
           ></ns-textbox>
-        <ns-button text="Search" icon="search" color="primary"
-          @click="doSearch"
-          ></ns-button>
+        <ns-button text="Save" icon="save" @click="doSave"></ns-button>
         <table>
-        <thead>
-          <tr>
-            <th>CODE</th>
-            <th>NAME</th>
-            <th>ACTIONS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in list">
-            <td v-text="item.code"></td>
-            <td v-text="item.name"></td>
-            <td>
-              <a v-link="{path:'/setting/site-type/'+item.code}">EDIT1</a>
-              <a v-link="{name:'site-type-edit',params:{code:item.code}}">EDIT3</a>
-            </td>
-          </tr>
-        </tbody>
+          <thead>
+            <tr>
+              <td>ID</td>
+              <th>CODE</th>
+              <th>NAME</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in list">
+              <td>{{$index+1}}</td>
+              <td v-text="item.code"></td>
+              <td v-text="item.name"></td>
+              <td>
+                <ns-icon-button icon="mode_edit" @click="edit(item)"></ns-icon-button>
+                <ns-icon-button icon="clear" @click="del(item)"></ns-icon-button>
+              </td>
+            </tr>
+          </tbody>
         </table>
+        <ns-confirm
+          :show.sync="showComfirm"
+          header="ยืนยันการลบ"
+          confirm-button-text="ยืนยัน"
+          deny-button-text="ยกเลิก"
+          @confirmed="doDelete()"
+          :close-on-confirm="true"
+          >
+          {{msg}}
+        </ns-confirm>
       </div>
     </div>
   </div>
@@ -58,30 +71,12 @@ module.exports = {
   },
 
   ready: function() {
+    console.log(this.$route.params);
 //    this.$dispatch('set-title', 'SETTING')
     this.getList();
   },
 
   methods: {
-    doSearch() {
-      // TODO: validate
-      if (this.form.code=='' && this.form.name=='') {
-        this.$dispatch('toast', 'กรุณาระบุเงื่อนไขการค้นหา');
-        return;
-      }
-
-      let param = {
-        code: this.form.code,
-        name: this.form.name
-      }
-      this.$http.post('/app/api/setting/site-type/search', param)
-      .then((res) => {
-        if (!res.data.status) {
-          return
-        }
-        this.list = res.data.list;
-      })
-    },
     edit(item) {
       //this.form = item;
       this.form.code = item.code;

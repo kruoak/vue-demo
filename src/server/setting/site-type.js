@@ -46,29 +46,55 @@ router.post('/del', [bodyParser.json()], (req, res) => {
   })
 });
 
-router.post('/list', [], (req, res) => {
+router.post('/search', [bodyParser.json()], (req, res) => {
+  // TODO: validate
+  if (false) {
+    res.send({
+      status:false,   
+      error: 'ERROR'
+    })
+    return;
+  }
+
   const db = mysql.connect();
-  const scope = {
+
+  const $scope = {
   };
+
   const getData = () => {
-    let sql = "SELECT code, name FROM site_type ORDER BY code";
-    return db.query(sql).then((rows) => {
-      scope.rows = rows;
+    let cond = [];
+    let param = {};
+    if (req.body.code != '') {
+      cond.push('code=:code');
+      param.code = req.body.code;
+    }
+    if (req.body.name != '') {
+      cond.push("name LIKE :name ");
+      param.name = '%' + req.body.name + '%';
+    }
+    let sql = `
+SELECT code, name FROM site_type
+WHERE ${cond.join(' AND ')}
+ORDER BY code
+`;
+    return db.query(sql, param).then((rows) => {
+      $scope.rows = rows;
     });
   }
+
   getData().catch((err) => {
-    scope.error = err;
+    $scope.error = err;
   }).done(() => {
-    if (scope.error) {
+    if ($scope.error) {
       res.send({
         status:false,
-        error: scope.error
+        error: $scope.error
       })
       return;
     }
     res.send({
       status:true,
-      list: scope.rows
+      list: $scope.rows
     })
   })
 });

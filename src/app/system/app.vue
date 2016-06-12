@@ -45,7 +45,7 @@ module.exports = {
     AppHeaderBar: require('./_app-header-bar.vue'),
     AppSideMenu: require('./_app-side-menu.vue'),
   },
-  ready: function() {
+  ready() {
     this.doSession = () => {
       this.$http.post('/signon/api/session').then((res) => {
         if (res.data.status) {
@@ -77,16 +77,16 @@ module.exports = {
     }
   },
   methods: {
-    'doExit': function() {
+    doExit() {
       helper.setCookie('claret-user', '{}');
       window.location.href='/signon'
     },
-    doSignOut: function() {
+    doSignOut() {
       this.sessionTimeout=false
       console.log('SignOut Click')
 //      window.location.href='/signon'
     },
-    handleResize: function() {
+    handleResize() {
       let el = window.getComputedStyle ? window.getComputedStyle(document.body, ':after') : false;
       if (el===false) {
         return
